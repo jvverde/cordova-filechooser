@@ -22,19 +22,19 @@ public class FileChooser extends CordovaPlugin {
     public boolean execute(String action, CordovaArgs args, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals(ACTION_OPEN)) {
-            chooseFile(callbackContext);
+            chooseFile(callbackContext,args.getString(0));
             return true;
         }
 
         return false;
     }
 
-    public void chooseFile(CallbackContext callbackContext) {
+    public void chooseFile(CallbackContext callbackContext,String type) {
 
         // type and title should be configurable
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
+        intent.setType(type);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 
